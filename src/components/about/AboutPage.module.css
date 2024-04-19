@@ -4,9 +4,22 @@
 
 @media (max-width: 391px) {
 
+  .aboutImage {
+    height: 300px;
+    width: auto;
+    object-fit: cover;
+    border-radius: 30px;
+    margin: 30px 30px 0;
+  }
+
   .aboutH1 {
     font-size: 27px;
     font-weight: 600;
+    margin: 0 0 30px;
+  }
+
+  .aboutParagraph {
+    margin-top: 30px;
   }
 
   .introText {
@@ -21,7 +34,7 @@
 
   .introFlex {
     display: flex;
-    flex-direction: column;
+    flex-direction: column-reverse;
   }
 }
 
@@ -49,6 +62,11 @@
   .aboutH1 {
     font-size: 36px;
     font-weight: 700;
+    margin: 0 0 60px;
+  }
+
+  .aboutParagraph {
+    margin-bottom: 40px;
   }
 
   .introText {
