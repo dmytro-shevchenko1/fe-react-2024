@@ -59,6 +59,11 @@
 
 @media (min-width: 1280px) {
 
+  .aboutImage {
+    height: 100vh;
+    width: auto;
+  }
+
   .aboutH1 {
     font-size: 36px;
     font-weight: 700;
