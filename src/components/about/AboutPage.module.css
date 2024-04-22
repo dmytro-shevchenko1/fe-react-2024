@@ -1,0 +1,89 @@
+.link {
+  color: #111;
+}
+
+@media (max-width: 391px) {
+
+  .aboutImage {
+    height: 300px;
+    width: auto;
+    object-fit: cover;
+    border-radius: 30px;
+    margin: 30px 30px 0;
+  }
+
+  .aboutH1 {
+    font-size: 27px;
+    font-weight: 600;
+    margin: 0 0 30px;
+  }
+
+  .aboutParagraph {
+    margin-top: 30px;
+  }
+
+  .introText {
+    margin: 30px;
+    font-size: 16px;
+    font-weight: 400;
+  }
+
+  .link {
+    text-decoration: none;
+  }
+
+  .introFlex {
+    display: flex;
+    flex-direction: column-reverse;
+  }
+}
+
+@media (min-width: 391px) and (max-width: 1279px) {
+
+  .aboutH1 {
+    font-size: 27px;
+    font-weight: 600;
+  }
+
+  .introText {
+    margin: 30px;
+    font-size: 16px;
+    font-weight: 400;
+  }
+
+  .introFlex {
+    display: flex;
+    flex-direction: column;
+  }
+}
+
+@media (min-width: 1280px) {
+
+  .aboutImage {
+    height: 100vh;
+    width: auto;
+  }
+
+  .aboutH1 {
+    font-size: 36px;
+    font-weight: 700;
+    margin: 0 0 60px;
+  }
+
+  .aboutParagraph {
+    margin-bottom: 40px;
+  }
+
+  .introText {
+    font-size: 22px;
+    font-weight: 400;
+    margin: 60px 0 0 53px;
+  }
+
+  .introFlex {
+    display: flex;
+    justify-content: space-between;
+    gap: 100px;
+    margin: 0;
+  }
+}
