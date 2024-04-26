@@ -1,11 +1,11 @@
-interface Category {
+export interface Category {
     id: number;
     name: string;
     image: string;
     createdAt: string;
     updatedAt: string;
 }
-interface Product {
+export interface Product {
     id: number;
     title: string;
     price: number;
@@ -15,5 +15,3 @@ interface Product {
     updatedAt: string;
     category: Category;
 }
-
-export type { Category, Product };
