@@ -1,4 +1,139 @@
+ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+a {
+  text-decoration: none;
+  color: #FFF;
+}
+
+li {
+  color: #FFF;
+  margin: 0;
+  padding: 0;
+}
+
 .header {
-  font-size: 34px;
-  text-align: center;
+  font-size: 16px;
+  font-weight: 500;
+}
+
+@media (max-width: 391px) {
+
+  .container {
+    width: 330px;
+    margin: 0 auto;
+  }
+
+  .header {
+    background-color: #111;
+    padding: 15px 30px;
+  }
+
+  .headerFlex {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .burgerMenu {
+    display: block;
+  }
+
+  .navItems,
+  .loginSign,
+  .themeButtons {
+    display: none;
+  }
+
+  .rightFlex {
+    display: flex;
+    flex-direction: row-reverse;
+    gap: 14px;
+  }
+}
+
+@media (min-width: 1280px) {
+
+  .container {
+    width: 1175px;
+    margin: 0 auto;
+  }
+
+  .burgerMenu {
+    display: none;
+  }
+
+  .header {
+    background-color: #111;
+    padding: 17px 53px;
+  }
+
+  .headerFlex {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .themeButtons {
+    display: flex;
+    align-items: center;
+  }
+
+  .sunButton,
+  .moonButton {
+    background: none;
+    border: none;
+    padding: 0;
+  }
+
+  .rightFlex {
+    display: flex;
+    margin-left: 426px;
+  }
+
+  .navItems {
+    display: flex;
+    align-items: center;
+    gap: 50px;
+  }
+
+  .cart {
+    margin-left: 124px;
+  }
+
+  .loginLink {
+    display: flex;
+    align-items: center;
+    background-color: #333;
+    border-radius: 40px;
+    padding: 5px 10px;
+    gap: 6px;
+    margin-left: 33px;
+    font-size: 16px;
+    font-weight: 500;
+    border: none;
+    color: #FFF;
+    font-family: "Montserrat", sans-serif;
+  }
+
+  .signLink {
+    display: flex;
+    align-items: center;
+    background-color: #EF4934;
+    border-radius: 40px;
+    padding: 5px 10px;
+    gap: 6px;
+    font-size: 16px;
+    font-weight: 500;
+    border: none;
+    color: #FFF;
+    font-family: "Montserrat", sans-serif;
+  }
+
+  .loginSign {
+    display: flex;
+    gap: 10px;
+  }
 }
