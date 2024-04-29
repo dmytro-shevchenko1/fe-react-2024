@@ -1,4 +1,4 @@
-import AboutPage from './components/about/AboutPage.tsx';
+import AboutPage from './components/about/AboutPage.component.tsx';
 import FooterComponent from './components/footer/Footer.component.tsx';
 import HeaderComponent from './components/header/Header.component.tsx';
 

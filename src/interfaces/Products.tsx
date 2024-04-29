@@ -1,10 +1,5 @@
-export interface Category {
-    id: number;
-    name: string;
-    image: string;
-    createdAt: string;
-    updatedAt: string;
-}
+import type { Category } from '@/interfaces/Category.tsx';
+
 export interface Product {
     id: number;
     title: string;

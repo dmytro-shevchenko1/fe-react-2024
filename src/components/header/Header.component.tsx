@@ -1,14 +1,13 @@
-import cart from '@/assets/cart.svg';
-import dividerLogo from '@/assets/divider.svg';
-import headerLogo from '@/assets/header-logo.svg';
-import loginLogo from '@/assets/Log_Out.svg';
-import burgerLogo from '@/assets/Menu_Duo_LG.svg';
-import moonLogo from '@/assets/moon.svg';
-import sunLogo from '@/assets/sun.svg';
-import userLogo from '@/assets/User_Add.svg';
+import burgerLogo from '@/assets/headerImages/burgerLogo.svg';
+import cart from '@/assets/headerImages/cart.svg';
+import dividerLogo from '@/assets/headerImages/divider.svg';
+import loginLogo from '@/assets/headerImages/login.svg';
+import headerLogo from '@/assets/headerImages/maLogo.svg';
+import moonLogo from '@/assets/headerImages/moon.svg';
+import userLogo from '@/assets/headerImages/signUp.svg';
+import sunLogo from '@/assets/headerImages/sun.svg';
 
-import styles from './header.module.css';
-// export const HeaderComponent = () => <header className={styles.header}>Header</header>;
+import styles from './Header.module.css';
 
 function HeaderComponent() {
     return (
