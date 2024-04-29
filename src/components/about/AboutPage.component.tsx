@@ -1,5 +1,5 @@
 import aboutMe from '@/assets/aboutImages/aboutMe.svg';
-import SocialLinks from '@/constants/SocialLinks.tsx';
+import { SOCIAL_LINKS } from '@/constants/socialLinks.ts';
 
 import styles from './AboutPage.module.css';
 
@@ -18,7 +18,7 @@ function About() {
                                 </p>
                                 <p className={styles.aboutParagraph}>
                                     This page was developed during the course{' '}
-                                    <a className={styles.link} href={SocialLinks.masters}>
+                                    <a className={styles.link} href={SOCIAL_LINKS.masters}>
                                         &apos;Intro to React&apos;
                                     </a>{' '}
                                     from Masters Academy in 2024.
