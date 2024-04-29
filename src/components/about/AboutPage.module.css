@@ -4,12 +4,17 @@
 
 @media (max-width: 391px) {
 
+  .container {
+    width: 330px;
+    margin: 0 auto;
+  }
+
   .aboutImage {
     height: 300px;
     width: auto;
     object-fit: cover;
     border-radius: 30px;
-    margin: 30px 30px 0;
+    margin: 30px 0 0;
   }
 
   .aboutH1 {
@@ -23,7 +28,7 @@
   }
 
   .introText {
-    margin: 30px;
+    margin: 30px 0;
     font-size: 16px;
     font-weight: 400;
   }
@@ -60,8 +65,11 @@
 @media (min-width: 1280px) {
 
   .aboutImage {
-    height: 100vh;
+    height: 100%;
     width: auto;
+    position: absolute;
+    top: 0;
+    right: 0;
   }
 
   .aboutH1 {
@@ -77,7 +85,8 @@
   .introText {
     font-size: 22px;
     font-weight: 400;
-    margin: 60px 0 0 53px;
+    margin: 60px 0 0;
+    width: 575px;
   }
 
   .introFlex {
@@ -86,4 +95,14 @@
     gap: 100px;
     margin: 0;
   }
+
+  .container {
+    width: 1175px;
+    margin: 0 auto;
+  }
+
+  main {
+    position: relative;
+  }
 }
+
