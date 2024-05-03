@@ -8,8 +8,12 @@ import userLogo from '@/assets/headerImages/signUp.svg';
 import sunLogo from '@/assets/headerImages/sun.svg';
 
 import styles from './Header.module.css';
+interface HeaderComponentProps {
+    handleChangePage: (component: 'About' | 'ProductsList') => void;
+    cartCount: number;
+}
 
-function HeaderComponent() {
+function HeaderComponent({ handleChangePage, cartCount }: HeaderComponentProps) {
     return (
         <>
             <header className={styles.header}>
@@ -27,15 +31,18 @@ function HeaderComponent() {
                         </div>
                         <div className={styles.rightFlex}>
                             <img className={styles.burgerMenu} src={burgerLogo} alt="burger" />
-                            <ul className={styles.navItems}>
-                                <li>
-                                    <a href="AboutPage.tsx">About</a>
-                                </li>
-                                <li>
-                                    <a href="Products.tsx">Products</a>
-                                </li>
-                            </ul>
-                            <img className={styles.cart} src={cart} alt="cart" />
+                            <div className={styles.navItems}>
+                                <button className={styles.navButton} onClick={() => handleChangePage('About')}>
+                                    About
+                                </button>
+                                <button className={styles.navButton} onClick={() => handleChangePage('ProductsList')}>
+                                    Products
+                                </button>
+                            </div>
+                            <button className={styles.cartButton}>
+                                <img className={styles.cart} src={cart} alt="cart" />
+                                {cartCount > 0 && <span className={styles.counter}>{cartCount}</span>}
+                            </button>
                             <div className={styles.loginSign}>
                                 <button className={styles.loginLink}>
                                     <img src={loginLogo} alt="login" />
