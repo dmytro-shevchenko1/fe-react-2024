@@ -1,6 +1,6 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
-import cart from '@/assets/productListImages/cardCart.svg';
+import CartComponent from '@/components/cart/Cart.component.tsx';
 import type { Product } from '@/interfaces/Products.ts';
 
 import styles from './ProductList.module.css';
@@ -12,6 +12,21 @@ interface ProductCardProps {
 
 export const ProductCard: React.FC<ProductCardProps> = ({ product, addToCart }) => {
     const [count, setCount] = useState(0);
+
+    useEffect(() => {
+        const storedCount = localStorage.getItem(`product_${product.id}_count`);
+        if (storedCount) {
+            setCount(Number.parseInt(storedCount, 10));
+        }
+    }, [product.id]);
+
+    const handleAddtoCart = () => {
+        const newCount = count + 1;
+        setCount(newCount);
+        localStorage.setItem(`product_${product.id}_count`, newCount.toString());
+        addToCart();
+    };
+
     return (
         <>
             <div className={styles.productCard}>
@@ -22,16 +37,7 @@ export const ProductCard: React.FC<ProductCardProps> = ({ product, addToCart }) 
                         <p className={styles.productPrice}>{product.price}</p>
                         <p className={styles.priceUah}>₴</p>
                     </div>
-                    <button
-                        className={styles.cartButton}
-                        onClick={() => {
-                            setCount(count + 1);
-                            addToCart();
-                        }}
-                    >
-                        <img src={cart} alt="cart" />
-                        {count > 0 && <span className={styles.counter}>{count}</span>}
-                    </button>
+                    <CartComponent count={count} onClick={handleAddtoCart} color={'black'} />
                 </div>
             </div>
         </>

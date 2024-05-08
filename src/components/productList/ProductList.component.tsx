@@ -1,5 +1,5 @@
-import mockProducts from '@/components/productList/mockData.json';
 import type { Product } from '@/interfaces/Products.ts';
+import mockProducts from '@/mocks/mockData.json';
 
 import ProductCard from './ProductCard.component.tsx';
 

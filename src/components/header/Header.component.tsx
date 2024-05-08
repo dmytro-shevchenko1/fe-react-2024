@@ -1,11 +1,11 @@
 import burgerLogo from '@/assets/headerImages/burgerLogo.svg';
-import cart from '@/assets/headerImages/cart.svg';
 import dividerLogo from '@/assets/headerImages/divider.svg';
 import loginLogo from '@/assets/headerImages/login.svg';
 import headerLogo from '@/assets/headerImages/maLogo.svg';
 import moonLogo from '@/assets/headerImages/moon.svg';
 import userLogo from '@/assets/headerImages/signUp.svg';
 import sunLogo from '@/assets/headerImages/sun.svg';
+import CartComponent from '@/components/cart/Cart.component.tsx';
 
 import styles from './Header.module.css';
 interface HeaderComponentProps {
@@ -39,10 +39,7 @@ function HeaderComponent({ handleChangePage, cartCount }: HeaderComponentProps) 
                                     Products
                                 </button>
                             </div>
-                            <button className={styles.cartButton}>
-                                <img className={styles.cart} src={cart} alt="cart" />
-                                {cartCount > 0 && <span className={styles.counter}>{cartCount}</span>}
-                            </button>
+                            <CartComponent count={cartCount} onClick={() => {}} color={'white'} />
                             <div className={styles.loginSign}>
                                 <button className={styles.loginLink}>
                                     <img src={loginLogo} alt="login" />

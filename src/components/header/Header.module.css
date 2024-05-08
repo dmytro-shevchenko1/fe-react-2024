@@ -47,28 +47,6 @@ li {
     display: none;
   }
 
-  .cartButton {
-    border: none;
-    background-color: transparent;
-    cursor: pointer;
-    position: relative;
-  }
-
-  .counter {
-    height: 17px;
-    width: 17px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border-radius: 50%;
-    background-color: #EF4934;
-    font-size: 10px;
-    font-weight: 700;
-    position: absolute;
-    top: -4px;
-    right: 3px;
-  }
-
   .rightFlex {
     display: flex;
     flex-direction: row-reverse;
@@ -119,6 +97,7 @@ li {
     display: flex;
     align-items: center;
     gap: 50px;
+    margin-right: 124px;
   }
 
   .navButton {
@@ -129,32 +108,6 @@ li {
     border: none;
     background-color: transparent;
     cursor: pointer;
-  }
-
-  .cart {
-    margin-left: 124px;
-  }
-
-  .cartButton {
-    border: none;
-    background-color: transparent;
-    cursor: pointer;
-    position: relative;
-  }
-
-  .counter {
-    height: 17px;
-    width: 17px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border-radius: 50%;
-    background-color: #EF4934;
-    font-size: 10px;
-    font-weight: 700;
-    position: absolute;
-    top: -4px;
-    right: 3px;
   }
 
   .loginLink {

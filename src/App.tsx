@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 import AboutPage from './components/about/AboutPage.component.tsx';
 import FooterComponent from './components/footer/Footer.component.tsx';
@@ -12,8 +12,17 @@ function App() {
         setCurrentComponent(component);
     };
 
+    useEffect(() => {
+        const storedCartCount = localStorage.getItem('cartCount');
+        if (storedCartCount) {
+            setCartCount(Number.parseInt(storedCartCount, 10));
+        }
+    }, []);
+
     const addToCart = () => {
-        setCartCount(cartCount + 1);
+        const newCartCount = cartCount + 1;
+        setCartCount(newCartCount);
+        localStorage.setItem('cartCount', newCartCount.toString());
     };
 
     return (
