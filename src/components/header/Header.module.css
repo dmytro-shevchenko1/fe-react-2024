@@ -97,10 +97,17 @@ li {
     display: flex;
     align-items: center;
     gap: 50px;
+    margin-right: 124px;
   }
 
-  .cart {
-    margin-left: 124px;
+  .navButton {
+    font-family: "Montserrat", sans-serif;
+    color: #FFF;
+    font-size: 16px;
+    font-weight: 500;
+    border: none;
+    background-color: transparent;
+    cursor: pointer;
   }
 
   .loginLink {
