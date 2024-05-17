@@ -9,7 +9,7 @@
 }
 
 .footerContent {
-  border-top: #CCC 1px solid;
+  border-top: 1px solid var(--footer-border);
 }
 
 @media (max-width: 391px) {

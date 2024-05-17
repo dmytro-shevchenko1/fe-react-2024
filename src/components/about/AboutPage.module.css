@@ -1,5 +1,5 @@
 .link {
-  color: #111;
+  color: var(--about-link);
 }
 
 @media (max-width: 391px) {

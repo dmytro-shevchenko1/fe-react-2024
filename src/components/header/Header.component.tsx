@@ -11,9 +11,11 @@ import styles from './Header.module.css';
 interface HeaderComponentProps {
     handleChangePage: (component: 'About' | 'ProductsList') => void;
     cartCount: number;
+    toggleTheme: (newTheme: 'light' | 'dark') => void;
+    theme: 'light' | 'dark';
 }
 
-function HeaderComponent({ handleChangePage, cartCount }: HeaderComponentProps) {
+function HeaderComponent({ handleChangePage, cartCount, toggleTheme, theme }: HeaderComponentProps) {
     return (
         <>
             <header className={styles.header}>
@@ -21,11 +23,11 @@ function HeaderComponent({ handleChangePage, cartCount }: HeaderComponentProps) 
                     <div className={styles.headerFlex}>
                         <img src={headerLogo} alt="headerLogo" />
                         <div className={styles.themeButtons}>
-                            <button className={styles.sunButton}>
+                            <button className={styles.sunButton} onClick={() => toggleTheme('light')}>
                                 <img src={sunLogo} alt="sun" />
                             </button>
                             <img src={dividerLogo} alt="divider" />
-                            <button className={styles.moonButton}>
+                            <button className={styles.moonButton} onClick={() => toggleTheme('dark')}>
                                 <img src={moonLogo} alt="moon" />
                             </button>
                         </div>
@@ -39,7 +41,7 @@ function HeaderComponent({ handleChangePage, cartCount }: HeaderComponentProps) 
                                     Products
                                 </button>
                             </div>
-                            <CartComponent count={cartCount} onClick={() => {}} color={'white'} />
+                            <CartComponent count={cartCount} onClick={() => {}} theme={theme} />
                             <div className={styles.loginSign}>
                                 <button className={styles.loginLink}>
                                     <img src={loginLogo} alt="login" />
