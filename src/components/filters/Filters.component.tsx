@@ -13,9 +13,11 @@ export const FiltersComponent = () => (
                     </button>
                 </div>
                 <div className={styles.rightFlex}>
-                    <button className={styles.filterButton}>Electronics</button>
-                    <button className={styles.filterButton}>Shoes</button>
-                    <button className={styles.filterButton}>Clothes</button>
+                    <div className={styles.filterButtonsFlex}>
+                        <button className={styles.filterButton}>Electronics</button>
+                        <button className={styles.filterButton}>Shoes</button>
+                        <button className={styles.filterButton}>Clothes</button>
+                    </div>
                     <div className={styles.sortFlex}>
                         <p className={styles.sortBy}>Sort by:</p>
                         <select className={styles.sortSelect} name="price" id="price">

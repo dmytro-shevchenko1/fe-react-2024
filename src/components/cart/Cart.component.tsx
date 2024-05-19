@@ -7,16 +7,15 @@ interface CartButtonProps {
     count: number;
     onClick: () => void;
     theme: 'light' | 'dark';
-    color?: 'white' | 'black';
+    whiteCart?: boolean;
 }
 
-const CartComponent: React.FC<CartButtonProps> = ({ count, onClick, theme, color }) => {
-    const cartButtonClassName = `${styles.cartButton} ${theme === 'light' ? styles.whiteCart : styles.blackCart}`;
-    const cartImageSource = theme === 'light' ? cartBlack : cartWhite;
+const CartComponent: React.FC<CartButtonProps> = ({ count, onClick, theme, whiteCart }) => {
+    const cartImageSource = (whiteCart ? cartWhite : theme) === 'light' ? cartBlack : cartWhite;
 
     return (
         <>
-            <button className={cartButtonClassName} onClick={onClick}>
+            <button className={styles.cartButton} onClick={onClick}>
                 <img src={cartImageSource} alt="cart" />
                 {count > 0 && <span className={styles.counter}>{count}</span>}
             </button>

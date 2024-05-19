@@ -2,12 +2,15 @@ import burgerLogo from '@/assets/headerImages/burgerLogo.svg';
 import dividerLogo from '@/assets/headerImages/divider.svg';
 import loginLogo from '@/assets/headerImages/login.svg';
 import headerLogo from '@/assets/headerImages/maLogo.svg';
-import moonLogo from '@/assets/headerImages/moon.svg';
+import moonLogoDark from '@/assets/headerImages/moonDark.svg';
+import moonLogoLight from '@/assets/headerImages/moonLight.svg';
 import userLogo from '@/assets/headerImages/signUp.svg';
-import sunLogo from '@/assets/headerImages/sun.svg';
+import sunLogoDark from '@/assets/headerImages/sunDark.svg';
+import sunLogoLight from '@/assets/headerImages/sunLight.svg';
 import CartComponent from '@/components/cart/Cart.component.tsx';
 
 import styles from './Header.module.css';
+
 interface HeaderComponentProps {
     handleChangePage: (component: 'About' | 'ProductsList') => void;
     cartCount: number;
@@ -16,6 +19,9 @@ interface HeaderComponentProps {
 }
 
 function HeaderComponent({ handleChangePage, cartCount, toggleTheme, theme }: HeaderComponentProps) {
+    const sunLogo = theme === 'light' ? sunLogoLight : sunLogoDark;
+    const moonLogo = theme === 'light' ? moonLogoDark : moonLogoLight;
+
     return (
         <>
             <header className={styles.header}>
@@ -41,7 +47,7 @@ function HeaderComponent({ handleChangePage, cartCount, toggleTheme, theme }: He
                                     Products
                                 </button>
                             </div>
-                            <CartComponent count={cartCount} onClick={() => {}} theme={theme} />
+                            <CartComponent count={cartCount} onClick={() => {}} theme={theme} whiteCart={true} />
                             <div className={styles.loginSign}>
                                 <button className={styles.loginLink}>
                                     <img src={loginLogo} alt="login" />
