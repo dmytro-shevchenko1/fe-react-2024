@@ -6,16 +6,21 @@ import styles from './Cart.module.css';
 interface CartButtonProps {
     count: number;
     onClick: () => void;
-    color: 'white' | 'black';
+    theme: 'light' | 'dark';
+    whiteCart?: boolean;
 }
 
-const CartComponent: React.FC<CartButtonProps> = ({ count, onClick, color = 'black' }) => (
-    <>
-        <button className={`${styles.cartButton} {color === 'white' ? styles.whiteCart : ''}`} onClick={onClick}>
-            <img src={color === 'white' ? cartWhite : cartBlack} alt="cart" />
-            {count > 0 && <span className={styles.counter}>{count}</span>}
-        </button>
-    </>
-);
+const CartComponent: React.FC<CartButtonProps> = ({ count, onClick, theme, whiteCart }) => {
+    const cartImageSource = (whiteCart ? cartWhite : theme) === 'light' ? cartBlack : cartWhite;
+
+    return (
+        <>
+            <button className={styles.cartButton} onClick={onClick}>
+                <img src={cartImageSource} alt="cart" />
+                {count > 0 && <span className={styles.counter}>{count}</span>}
+            </button>
+        </>
+    );
+};
 
 export default CartComponent;
