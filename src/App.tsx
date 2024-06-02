@@ -1,7 +1,5 @@
 import { useEffect, useState } from 'react';
 
-import FiltersComponent from '@/components/filters/Filters.component.tsx';
-
 import AboutPage from './components/about/AboutPage.component.tsx';
 import FooterComponent from './components/footer/Footer.component.tsx';
 import HeaderComponent from './components/header/Header.component.tsx';
@@ -48,7 +46,6 @@ function App() {
         <>
             <div className={`${theme === 'dark' ? styles.darkTheme : styles.lightTheme}`}>
                 <HeaderComponent handleChangePage={handleChangePage} cartCount={cartCount} toggleTheme={toggleTheme} theme={theme} />
-                {currentComponent === 'ProductsList' && <FiltersComponent />}
                 {currentComponent === 'About' ? <AboutPage /> : <ProductsList addToCart={addToCart} theme={theme} />}
                 <FooterComponent />
             </div>

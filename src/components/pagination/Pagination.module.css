@@ -1,0 +1,25 @@
+.paginationFlex {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 55px 0 70px;
+  gap: 5px;
+}
+
+.paginationButton {
+  width: 32px;
+  padding: 7px;
+  font-family: "Montserrat", sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  background-color: transparent;
+  color: var(--pagination-text);
+  border-radius: 8px;
+  border: 1px solid var(--pagination-border-color);
+}
+
+.paginationButton.active {
+  background-color: #EF4934;
+  color: #FFF;
+  font-weight: 700;
+}
