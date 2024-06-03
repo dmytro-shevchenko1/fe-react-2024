@@ -8,10 +8,9 @@ import styles from './ProductList.module.css';
 interface ProductCardProps {
     product: Product;
     addToCart: () => void;
-    theme: 'light' | 'dark';
 }
 
-export const ProductCard: React.FC<ProductCardProps> = ({ product, addToCart, theme }) => {
+export const ProductCard: React.FC<ProductCardProps> = ({ product, addToCart }) => {
     const [count, setCount] = useState(0);
 
     useEffect(() => {
@@ -38,7 +37,7 @@ export const ProductCard: React.FC<ProductCardProps> = ({ product, addToCart, th
                         <p className={styles.productPrice}>{product.price}</p>
                         <p className={styles.priceUah}>₴</p>
                     </div>
-                    <CartComponent count={count} onClick={handleAddtoCart} theme={theme} />
+                    <CartComponent count={count} onClick={handleAddtoCart} />
                 </div>
             </div>
         </>

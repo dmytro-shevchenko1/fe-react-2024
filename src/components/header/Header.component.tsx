@@ -8,17 +8,17 @@ import userLogo from '@/assets/headerImages/signUp.svg';
 import sunLogoDark from '@/assets/headerImages/sunDark.svg';
 import sunLogoLight from '@/assets/headerImages/sunLight.svg';
 import CartComponent from '@/components/cart/Cart.component.tsx';
+import { useTheme } from '@/context/ThemeContext.tsx';
 
 import styles from './Header.module.css';
 
 interface HeaderComponentProps {
     handleChangePage: (component: 'About' | 'ProductsList') => void;
     cartCount: number;
-    toggleTheme: (newTheme: 'light' | 'dark') => void;
-    theme: 'light' | 'dark';
 }
 
-function HeaderComponent({ handleChangePage, cartCount, toggleTheme, theme }: HeaderComponentProps) {
+function HeaderComponent({ handleChangePage, cartCount }: HeaderComponentProps) {
+    const { theme, toggleTheme } = useTheme();
     const sunLogo = theme === 'light' ? sunLogoLight : sunLogoDark;
     const moonLogo = theme === 'light' ? moonLogoDark : moonLogoLight;
 
@@ -47,7 +47,7 @@ function HeaderComponent({ handleChangePage, cartCount, toggleTheme, theme }: He
                                     Products
                                 </button>
                             </div>
-                            <CartComponent count={cartCount} onClick={() => {}} theme={theme} whiteCart={true} />
+                            <CartComponent count={cartCount} onClick={() => {}} whiteCart={true} />
                             <div className={styles.loginSign}>
                                 <button className={styles.loginLink}>
                                     <img src={loginLogo} alt="login" />
