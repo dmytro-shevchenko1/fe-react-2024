@@ -1,16 +1,17 @@
 import { useEffect, useState } from 'react';
 
 import CartComponent from '@/components/cart/Cart.component.tsx';
+import { useCart } from '@/context/CartContext.tsx';
 import type { Product } from '@/interfaces/Products.ts';
 
 import styles from './ProductList.module.css';
 
 interface ProductCardProps {
     product: Product;
-    addToCart: () => void;
 }
 
-export const ProductCard: React.FC<ProductCardProps> = ({ product, addToCart }) => {
+export const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
+    const { addToCart } = useCart();
     const [count, setCount] = useState(0);
 
     useEffect(() => {

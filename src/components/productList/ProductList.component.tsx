@@ -10,10 +10,7 @@ import ProductCard from './ProductCard.component.tsx';
 
 import styles from './ProductList.module.css';
 
-interface ProductsListProps {
-    addToCart: () => void;
-}
-const ProductsList: React.FC<ProductsListProps> = ({ addToCart }) => {
+const ProductsList: React.FC = () => {
     const [currentPage, setCurrentPage] = useState(1);
     const [productsPerPage] = useState(8);
     const [filteredProducts, setFilteredProducts] = useState<Product[]>([]);
@@ -87,7 +84,7 @@ const ProductsList: React.FC<ProductsListProps> = ({ addToCart }) => {
                 <FiltersComponent onCategorySelect={handleCategorySelect} onSortSelect={handleSortSelect} onSearch={handleSearch} />
                 <div className={styles.cardsPlacement}>
                     {currentProducts.map((product) => (
-                        <ProductCard key={product.id} product={product} addToCart={addToCart} />
+                        <ProductCard key={product.id} product={product} />
                     ))}
                 </div>
                 <PaginationComponent currentPage={currentPage} totalPages={totalPages} onPageChange={handlePageChange} />

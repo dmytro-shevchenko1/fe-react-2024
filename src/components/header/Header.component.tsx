@@ -8,16 +8,17 @@ import userLogo from '@/assets/headerImages/signUp.svg';
 import sunLogoDark from '@/assets/headerImages/sunDark.svg';
 import sunLogoLight from '@/assets/headerImages/sunLight.svg';
 import CartComponent from '@/components/cart/Cart.component.tsx';
+import { useCart } from '@/context/CartContext.tsx';
 import { useTheme } from '@/context/ThemeContext.tsx';
 
 import styles from './Header.module.css';
 
 interface HeaderComponentProps {
     handleChangePage: (component: 'About' | 'ProductsList') => void;
-    cartCount: number;
 }
 
-function HeaderComponent({ handleChangePage, cartCount }: HeaderComponentProps) {
+function HeaderComponent({ handleChangePage }: HeaderComponentProps) {
+    const { cartCount } = useCart();
     const { theme, toggleTheme } = useTheme();
     const sunLogo = theme === 'light' ? sunLogoLight : sunLogoDark;
     const moonLogo = theme === 'light' ? moonLogoDark : moonLogoLight;
