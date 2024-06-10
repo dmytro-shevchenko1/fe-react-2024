@@ -1,6 +1,8 @@
 import { useEffect, useState } from 'react';
 
+import type { Category } from '@/components/filters/Filters.component.tsx';
 import FiltersComponent from '@/components/filters/Filters.component.tsx';
+import { SortOption } from '@/components/filters/Filters.component.tsx';
 import type { Product } from '@/interfaces/Products.ts';
 import mockProducts from '@/mocks/mockData.json';
 
@@ -12,48 +14,53 @@ import styles from './ProductList.module.css';
 
 const ProductsList: React.FC = () => {
     const [currentPage, setCurrentPage] = useState(1);
-    const [productsPerPage] = useState(8);
     const [filteredProducts, setFilteredProducts] = useState<Product[]>([]);
-    const [selectedCategories, setSelectedCategories] = useState<string[]>([]);
-    const [sortOption, setSortOption] = useState<string>('priceSort');
+    const [selectedCategories, setSelectedCategories] = useState<Category[]>([]);
+    const [sortOption, setSortOption] = useState<SortOption>(SortOption.PRICE_HIGH_TO_LOW);
     const [searchQuery, setSearchQuery] = useState<string>('');
+    const [searchInput, setSearchInput] = useState<string>('');
+
+    const productsPerPage = 8;
 
     useEffect(() => {
-        const filterAndSortProducts = () => {
-            let updatedProducts = [...mockProducts];
+        let updatedProducts = mockProducts;
 
+        const filterProducts = () => {
             if (selectedCategories.length > 0) {
-                updatedProducts = updatedProducts.filter((product) => selectedCategories.includes(product.category.name));
+                updatedProducts = updatedProducts.filter((product) => selectedCategories.includes(product.category.name as Category));
             }
 
             if (searchQuery) {
                 updatedProducts = updatedProducts.filter((product) => product.title.toLowerCase().includes(searchQuery.toLowerCase()));
             }
+        };
+        filterProducts();
 
+        const sortProducts = () => {
             switch (sortOption) {
-                case 'priceAsc': {
+                case SortOption.PRICE_LOW_TO_HIGH: {
                     updatedProducts = updatedProducts.sort((a, b) => a.price - b.price);
                     break;
                 }
-                case 'priceSort': {
+                case SortOption.PRICE_HIGH_TO_LOW: {
                     updatedProducts = updatedProducts.sort((a, b) => b.price - a.price);
                     break;
                 }
-                case 'dateNewest': {
+                case SortOption.NEWEST: {
                     updatedProducts = updatedProducts.sort((a, b) => new Date(b.creationAt).getTime() - new Date(a.creationAt).getTime());
                     break;
                 }
-                case 'dateOldest': {
+                case SortOption.OLDEST: {
                     updatedProducts = updatedProducts.sort((a, b) => new Date(a.creationAt).getTime() - new Date(b.creationAt).getTime());
                     break;
                 }
             }
-
-            setFilteredProducts(updatedProducts);
-            setCurrentPage(1);
         };
 
-        filterAndSortProducts();
+        sortProducts();
+
+        setFilteredProducts(updatedProducts);
+        setCurrentPage(1);
     }, [selectedCategories, sortOption, searchQuery]);
 
     const indexOfLastProduct = currentPage * productsPerPage;
@@ -66,22 +73,38 @@ const ProductsList: React.FC = () => {
         setCurrentPage(page);
     };
 
-    const handleCategorySelect = (categories: string[]) => {
-        setSelectedCategories(categories);
+    const handleCategorySelect = (category: Category) => {
+        setSelectedCategories((previousCategories) =>
+            previousCategories.includes(category)
+                ? previousCategories.filter((cat) => cat !== category)
+                : [...previousCategories, category],
+        );
     };
 
-    const handleSortSelect = (selectedSortOption: string) => {
+    const handleSortSelect = (selectedSortOption: SortOption) => {
         setSortOption(selectedSortOption);
     };
 
-    const handleSearch = (query: string) => {
-        setSearchQuery(query);
+    const handleSearchInput = (query: string) => {
+        setSearchInput(query);
+    };
+
+    const handleSearch = () => {
+        setSearchQuery(searchInput);
     };
 
     return (
         <>
             <div className={styles.container}>
-                <FiltersComponent onCategorySelect={handleCategorySelect} onSortSelect={handleSortSelect} onSearch={handleSearch} />
+                <FiltersComponent
+                    selectedCategories={selectedCategories}
+                    sortOption={sortOption}
+                    searchQuery={searchInput}
+                    handleCategorySelect={handleCategorySelect}
+                    handleSortSelect={handleSortSelect}
+                    setSearchQuery={handleSearchInput}
+                    handleSearch={handleSearch}
+                />
                 <div className={styles.cardsPlacement}>
                     {currentProducts.map((product) => (
                         <ProductCard key={product.id} product={product} />

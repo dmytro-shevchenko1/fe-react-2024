@@ -8,8 +8,7 @@ import userLogo from '@/assets/headerImages/signUp.svg';
 import sunLogoDark from '@/assets/headerImages/sunDark.svg';
 import sunLogoLight from '@/assets/headerImages/sunLight.svg';
 import CartComponent from '@/components/cart/Cart.component.tsx';
-import { useCart } from '@/context/CartContext.tsx';
-import { useTheme } from '@/context/ThemeContext.tsx';
+import { Theme, useTheme } from '@/context/ThemeContext.tsx';
 
 import styles from './Header.module.css';
 
@@ -18,7 +17,6 @@ interface HeaderComponentProps {
 }
 
 function HeaderComponent({ handleChangePage }: HeaderComponentProps) {
-    const { cartCount } = useCart();
     const { theme, toggleTheme } = useTheme();
     const sunLogo = theme === 'light' ? sunLogoLight : sunLogoDark;
     const moonLogo = theme === 'light' ? moonLogoDark : moonLogoLight;
@@ -30,11 +28,11 @@ function HeaderComponent({ handleChangePage }: HeaderComponentProps) {
                     <div className={styles.headerFlex}>
                         <img src={headerLogo} alt="headerLogo" />
                         <div className={styles.themeButtons}>
-                            <button className={styles.sunButton} onClick={() => toggleTheme('light')}>
+                            <button className={styles.sunButton} onClick={() => toggleTheme(Theme.LIGHT)}>
                                 <img src={sunLogo} alt="sun" />
                             </button>
                             <img src={dividerLogo} alt="divider" />
-                            <button className={styles.moonButton} onClick={() => toggleTheme('dark')}>
+                            <button className={styles.moonButton} onClick={() => toggleTheme(Theme.DARK)}>
                                 <img src={moonLogo} alt="moon" />
                             </button>
                         </div>
@@ -48,7 +46,7 @@ function HeaderComponent({ handleChangePage }: HeaderComponentProps) {
                                     Products
                                 </button>
                             </div>
-                            <CartComponent count={cartCount} onClick={() => {}} whiteCart={true} />
+                            <CartComponent whiteCart={true} />
                             <div className={styles.loginSign}>
                                 <button className={styles.loginLink}>
                                     <img src={loginLogo} alt="login" />
