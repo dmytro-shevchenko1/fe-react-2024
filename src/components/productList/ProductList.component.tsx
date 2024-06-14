@@ -1,8 +1,8 @@
 import { useEffect, useState } from 'react';
 
-import type { Category } from '@/components/filters/Filters.component.tsx';
 import FiltersComponent from '@/components/filters/Filters.component.tsx';
-import { SortOption } from '@/components/filters/Filters.component.tsx';
+import type { Category } from '@/constants/filtersCategory.ts';
+import { SortOption } from '@/constants/filtersSortOption.ts';
 import type { Product } from '@/interfaces/Products.ts';
 import mockProducts from '@/mocks/mockData.json';
 
@@ -39,19 +39,23 @@ const ProductsList: React.FC = () => {
         const sortProducts = () => {
             switch (sortOption) {
                 case SortOption.PRICE_LOW_TO_HIGH: {
-                    updatedProducts = updatedProducts.sort((a, b) => a.price - b.price);
+                    updatedProducts = updatedProducts.toSorted((a, b) => a.price - b.price);
                     break;
                 }
                 case SortOption.PRICE_HIGH_TO_LOW: {
-                    updatedProducts = updatedProducts.sort((a, b) => b.price - a.price);
+                    updatedProducts = updatedProducts.toSorted((a, b) => b.price - a.price);
                     break;
                 }
                 case SortOption.NEWEST: {
-                    updatedProducts = updatedProducts.sort((a, b) => new Date(b.creationAt).getTime() - new Date(a.creationAt).getTime());
+                    updatedProducts = updatedProducts.toSorted(
+                        (a, b) => new Date(b.creationAt).getTime() - new Date(a.creationAt).getTime(),
+                    );
                     break;
                 }
                 case SortOption.OLDEST: {
-                    updatedProducts = updatedProducts.sort((a, b) => new Date(a.creationAt).getTime() - new Date(b.creationAt).getTime());
+                    updatedProducts = updatedProducts.toSorted(
+                        (a, b) => new Date(a.creationAt).getTime() - new Date(b.creationAt).getTime(),
+                    );
                     break;
                 }
             }

@@ -1,4 +1,4 @@
-import { Category } from '@/components/filters/Filters.component';
+import { Category } from '@/constants/filtersCategory.ts';
 
 import styles from './Filters.module.css';
 

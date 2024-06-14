@@ -1,20 +1,9 @@
 import CategoryFilterButtons from '@/components/filters/FilterButton.component.tsx';
 import SearchInput from '@/components/filters/SearchInput.component.tsx';
+import type { Category } from '@/constants/filtersCategory.ts';
+import { SortOption } from '@/constants/filtersSortOption.ts';
 
 import styles from './Filters.module.css';
-
-export enum Category {
-    ELECTRONICS = 'Electronics',
-    SHOES = 'Shoes',
-    CLOTHES = 'Clothes',
-}
-
-export enum SortOption {
-    PRICE_HIGH_TO_LOW = 'priceDesc',
-    PRICE_LOW_TO_HIGH = 'priceAsc',
-    NEWEST = 'dateNewest',
-    OLDEST = 'dateOldest',
-}
 
 interface FiltersComponentProps {
     selectedCategories: Category[];
