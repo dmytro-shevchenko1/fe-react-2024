@@ -1,27 +1,48 @@
-import searchGlass from '@/assets/filtersImages/searchGlass.svg';
+import CategoryFilterButtons from '@/components/filters/FilterButton.component.tsx';
+import SearchInput from '@/components/filters/SearchInput.component.tsx';
+import type { Category } from '@/constants/filtersCategory.ts';
+import { SortOption } from '@/constants/filtersSortOption.ts';
 
 import styles from './Filters.module.css';
 
-export const FiltersComponent = () => (
+interface FiltersComponentProps {
+    selectedCategories: Category[];
+    sortOption: SortOption;
+    searchQuery: string;
+    handleCategorySelect: (category: Category) => void;
+    handleSortSelect: (sortOption: SortOption) => void;
+    setSearchQuery: (searchQuery: string) => void;
+    handleSearch: () => void;
+}
+
+export const FiltersComponent: React.FC<FiltersComponentProps> = ({
+    selectedCategories,
+    sortOption,
+    searchQuery,
+    setSearchQuery,
+    handleCategorySelect,
+    handleSortSelect,
+    handleSearch,
+}) => (
     <>
         <div className={styles.container}>
             <section className={styles.filterFlex}>
-                <div className={styles.searchContainer}>
-                    <input className={styles.searchBar} type="search" placeholder={'Search...'} />
-                    <button className={styles.searchButton}>
-                        <img src={searchGlass} alt="search" />
-                    </button>
-                </div>
+                <SearchInput searchQuery={searchQuery} setSearchQuery={setSearchQuery} handleSearch={handleSearch} />
                 <div className={styles.rightFlex}>
-                    <div className={styles.filterButtonsFlex}>
-                        <button className={styles.filterButton}>Electronics</button>
-                        <button className={styles.filterButton}>Shoes</button>
-                        <button className={styles.filterButton}>Clothes</button>
-                    </div>
+                    <CategoryFilterButtons selectedCategories={selectedCategories} handleCategorySelect={handleCategorySelect} />
                     <div className={styles.sortFlex}>
                         <p className={styles.sortBy}>Sort by:</p>
-                        <select className={styles.sortSelect} name="price" id="price">
-                            <option value="priceSort">Price (High - Low)</option>
+                        <select
+                            className={styles.sortSelect}
+                            name="sortOption"
+                            id="sortOption"
+                            value={sortOption}
+                            onChange={(event) => handleSortSelect(event.target.value as SortOption)}
+                        >
+                            <option value={SortOption.PRICE_HIGH_TO_LOW}>Price (High - Low)</option>
+                            <option value={SortOption.PRICE_LOW_TO_HIGH}>Price (Low - High)</option>
+                            <option value={SortOption.NEWEST}>Newest</option>
+                            <option value={SortOption.OLDEST}>Oldest</option>
                         </select>
                     </div>
                 </div>

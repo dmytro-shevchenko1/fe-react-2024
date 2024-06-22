@@ -10,6 +10,11 @@
   font-weight: 600;
 }
 
+.filterButton.active {
+  background-color: #EF4934;
+  color: #FFF;
+}
+
 .sortFlex {
   display: flex;
   align-items: center;
