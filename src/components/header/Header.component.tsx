@@ -1,3 +1,5 @@
+import { NavLink } from 'react-router-dom';
+
 import burgerLogo from '@/assets/headerImages/burgerLogo.svg';
 import dividerLogo from '@/assets/headerImages/divider.svg';
 import loginLogo from '@/assets/headerImages/login.svg';
@@ -12,11 +14,7 @@ import { Theme, useTheme } from '@/context/ThemeContext.tsx';
 
 import styles from './Header.module.css';
 
-interface HeaderComponentProps {
-    handleChangePage: (component: 'About' | 'ProductsList') => void;
-}
-
-function HeaderComponent({ handleChangePage }: HeaderComponentProps) {
+function HeaderComponent() {
     const { theme, toggleTheme } = useTheme();
     const sunLogo = theme === 'light' ? sunLogoLight : sunLogoDark;
     const moonLogo = theme === 'light' ? moonLogoDark : moonLogoLight;
@@ -39,12 +37,15 @@ function HeaderComponent({ handleChangePage }: HeaderComponentProps) {
                         <div className={styles.rightFlex}>
                             <img className={styles.burgerMenu} src={burgerLogo} alt="burger" />
                             <div className={styles.navItems}>
-                                <button className={styles.navButton} onClick={() => handleChangePage('About')}>
+                                <NavLink className={({ isActive }) => (isActive ? styles.navButtonActive : styles.navButton)} to="/">
                                     About
-                                </button>
-                                <button className={styles.navButton} onClick={() => handleChangePage('ProductsList')}>
+                                </NavLink>
+                                <NavLink
+                                    className={({ isActive }) => (isActive ? styles.navButtonActive : styles.navButton)}
+                                    to={'products'}
+                                >
                                     Products
-                                </button>
+                                </NavLink>
                             </div>
                             <CartComponent whiteCart={true} />
                             <div className={styles.loginSign}>
