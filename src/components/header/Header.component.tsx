@@ -10,6 +10,7 @@ import userLogo from '@/assets/headerImages/signUp.svg';
 import sunLogoDark from '@/assets/headerImages/sunDark.svg';
 import sunLogoLight from '@/assets/headerImages/sunLight.svg';
 import CartComponent from '@/components/cart/Cart.component.tsx';
+import { ROUTES } from '@/constants/routes.ts';
 import { Theme, useTheme } from '@/context/ThemeContext.tsx';
 
 import styles from './Header.module.css';
@@ -37,12 +38,15 @@ function HeaderComponent() {
                         <div className={styles.rightFlex}>
                             <img className={styles.burgerMenu} src={burgerLogo} alt="burger" />
                             <div className={styles.navItems}>
-                                <NavLink className={({ isActive }) => (isActive ? styles.navButtonActive : styles.navButton)} to="/">
+                                <NavLink
+                                    className={({ isActive }) => (isActive ? styles.navButtonActive : styles.navButton)}
+                                    to={ROUTES.ABOUT}
+                                >
                                     About
                                 </NavLink>
                                 <NavLink
                                     className={({ isActive }) => (isActive ? styles.navButtonActive : styles.navButton)}
-                                    to={'products'}
+                                    to={ROUTES.PRODUCTS}
                                 >
                                     Products
                                 </NavLink>
