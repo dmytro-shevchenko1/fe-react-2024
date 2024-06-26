@@ -111,6 +111,10 @@ li {
     cursor: pointer;
   }
 
+  .navButtonActive {
+    font-weight: 700;
+  }
+
   .loginLink {
     display: flex;
     align-items: center;
