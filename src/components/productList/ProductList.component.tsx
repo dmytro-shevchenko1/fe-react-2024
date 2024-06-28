@@ -1,10 +1,10 @@
 import { useEffect, useState } from 'react';
 
 import FiltersComponent from '@/components/filters/Filters.component.tsx';
-import type { Category } from '@/constants/filtersCategory.ts';
+import LoadingSpinner from '@/components/loadingSpinner/LoadingSpinner.component.tsx';
 import { SortOption } from '@/constants/filtersSortOption.ts';
+import type { Category } from '@/interfaces/Category.ts';
 import type { Product } from '@/interfaces/Products.ts';
-import mockProducts from '@/mocks/mockData.json';
 
 import PaginationComponent from '../pagination/Pagination.component.tsx';
 
@@ -14,79 +14,72 @@ import styles from './ProductList.module.css';
 
 const ProductsList: React.FC = () => {
     const [currentPage, setCurrentPage] = useState(1);
-    const [filteredProducts, setFilteredProducts] = useState<Product[]>([]);
+    const [products, setProducts] = useState<Product[]>([]);
+    const [categories, setCategories] = useState<Category[]>([]);
     const [selectedCategories, setSelectedCategories] = useState<Category[]>([]);
     const [sortOption, setSortOption] = useState<SortOption>(SortOption.PRICE_HIGH_TO_LOW);
     const [searchQuery, setSearchQuery] = useState<string>('');
     const [searchInput, setSearchInput] = useState<string>('');
+    const [totalPages, setTotalPages] = useState(0);
+    const [isLoading, setLoading] = useState<boolean>(false);
 
     const productsPerPage = 8;
 
+    const capitalizeFirstLetter = (input: string): string => input.replaceAll(/\b\w/g, (char) => char.toUpperCase());
+
     useEffect(() => {
-        let updatedProducts = mockProducts;
+        const fetchProducts = async () => {
+            setLoading(true);
+            const offset = (currentPage - 1) * productsPerPage;
+            const categoryIds = selectedCategories.map((category) => category.id).join(',');
+            const sortField = sortOption === SortOption.NEWEST || sortOption === SortOption.OLDEST ? 'date' : 'price';
+            const sortOrder = sortOption === SortOption.PRICE_HIGH_TO_LOW || sortOption === SortOption.OLDEST ? 'desc' : 'asc';
+            try {
+                const response = await fetch(
+                    `https://ma-backend-api.mocintra.com/api/v1/products?limit=${productsPerPage}&offset=${offset}&title=${capitalizeFirstLetter(searchQuery.toLowerCase())}&categoryId=${categoryIds}&&sortField=${sortField}&sortOrder=${sortOrder}`,
+                );
+                const data = await response.json();
 
-        const filterProducts = () => {
-            if (selectedCategories.length > 0) {
-                updatedProducts = updatedProducts.filter((product) => selectedCategories.includes(product.category.name as Category));
-            }
+                // console.log('API Response for Products:', data);
 
-            if (searchQuery) {
-                updatedProducts = updatedProducts.filter((product) => product.title.toLowerCase().includes(searchQuery.toLowerCase()));
-            }
-        };
-        filterProducts();
-
-        const sortProducts = () => {
-            switch (sortOption) {
-                case SortOption.PRICE_LOW_TO_HIGH: {
-                    updatedProducts = updatedProducts.toSorted((a, b) => a.price - b.price);
-                    break;
-                }
-                case SortOption.PRICE_HIGH_TO_LOW: {
-                    updatedProducts = updatedProducts.toSorted((a, b) => b.price - a.price);
-                    break;
-                }
-                case SortOption.NEWEST: {
-                    updatedProducts = updatedProducts.toSorted(
-                        (a, b) => new Date(b.creationAt).getTime() - new Date(a.creationAt).getTime(),
-                    );
-                    break;
-                }
-                case SortOption.OLDEST: {
-                    updatedProducts = updatedProducts.toSorted(
-                        (a, b) => new Date(a.creationAt).getTime() - new Date(b.creationAt).getTime(),
-                    );
-                    break;
-                }
+                setProducts(data.products);
+                setTotalPages(Math.ceil(data.total / productsPerPage));
+            } catch (error) {
+                console.error('Error fetching products:', error);
+            } finally {
+                setLoading(false);
             }
         };
+        fetchProducts();
+    }, [currentPage, selectedCategories, sortOption, searchQuery]);
 
-        sortProducts();
+    useEffect(() => {
+        const fetchCategories = async () => {
+            try {
+                const response = await fetch('https://ma-backend-api.mocintra.com/api/v1/categories');
+                const data = await response.json();
+                // console.log('API Response for Categories:', data);
 
-        setFilteredProducts(updatedProducts);
-        setCurrentPage(1);
-    }, [selectedCategories, sortOption, searchQuery]);
-
-    const indexOfLastProduct = currentPage * productsPerPage;
-    const indexOfFirstProduct = indexOfLastProduct - productsPerPage;
-    const currentProducts = filteredProducts.slice(indexOfFirstProduct, indexOfLastProduct);
-
-    const totalPages = Math.ceil(filteredProducts.length / productsPerPage);
+                setCategories(data);
+            } catch (error) {
+                console.error('Error fetching categories:', error);
+            }
+        };
+        fetchCategories();
+    }, []);
 
     const handlePageChange = (page: number) => {
         setCurrentPage(page);
     };
 
     const handleCategorySelect = (category: Category) => {
-        setSelectedCategories((previousCategories) =>
-            previousCategories.includes(category)
-                ? previousCategories.filter((cat) => cat !== category)
-                : [...previousCategories, category],
-        );
+        setSelectedCategories((previousCategories) => (previousCategories.includes(category) ? [] : [category]));
+        setCurrentPage(1);
     };
 
     const handleSortSelect = (selectedSortOption: SortOption) => {
         setSortOption(selectedSortOption);
+        setCurrentPage(1);
     };
 
     const handleSearchInput = (query: string) => {
@@ -95,28 +88,36 @@ const ProductsList: React.FC = () => {
 
     const handleSearch = () => {
         setSearchQuery(searchInput);
+        setCurrentPage(1);
     };
 
     return (
-        <>
-            <div className={styles.container}>
-                <FiltersComponent
-                    selectedCategories={selectedCategories}
-                    sortOption={sortOption}
-                    searchQuery={searchInput}
-                    handleCategorySelect={handleCategorySelect}
-                    handleSortSelect={handleSortSelect}
-                    setSearchQuery={handleSearchInput}
-                    handleSearch={handleSearch}
-                />
-                <div className={styles.cardsPlacement}>
-                    {currentProducts.map((product) => (
-                        <ProductCard key={product.id} product={product} />
-                    ))}
-                </div>
-                <PaginationComponent currentPage={currentPage} totalPages={totalPages} onPageChange={handlePageChange} />
-            </div>
-        </>
+        <div className={styles.container}>
+            <FiltersComponent
+                categories={categories}
+                selectedCategories={selectedCategories}
+                sortOption={sortOption}
+                searchQuery={searchInput}
+                handleCategorySelect={handleCategorySelect}
+                handleSortSelect={handleSortSelect}
+                setSearchQuery={handleSearchInput}
+                handleSearch={handleSearch}
+            />
+            {isLoading ? (
+                <LoadingSpinner />
+            ) : (
+                <>
+                    <div className={styles.cardsPlacement}>
+                        {products.length > 0 ? (
+                            products.map((product) => <ProductCard key={product.id} product={product} />)
+                        ) : (
+                            <p>No products found</p>
+                        )}
+                    </div>
+                    <PaginationComponent currentPage={currentPage} totalPages={totalPages} onPageChange={handlePageChange} />
+                </>
+            )}
+        </div>
     );
 };
 
