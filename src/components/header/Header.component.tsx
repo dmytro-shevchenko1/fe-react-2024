@@ -11,7 +11,7 @@ import sunLogoDark from '@/assets/headerImages/sunDark.svg';
 import sunLogoLight from '@/assets/headerImages/sunLight.svg';
 import CartComponent from '@/components/cart/Cart.component.tsx';
 import { ROUTES } from '@/constants/routes.ts';
-import { Theme, useTheme } from '@/context/ThemeContext.tsx';
+import { Theme, useTheme } from '@/hooks/context/ThemeContext.tsx';
 
 import styles from './Header.module.css';
 
