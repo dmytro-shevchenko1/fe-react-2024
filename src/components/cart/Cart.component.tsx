@@ -1,7 +1,7 @@
 import cartBlack from '@/assets/cartImages/cartBlack.svg';
 import cartWhite from '@/assets/cartImages/cartWhite.svg';
-import { useCart } from '@/context/CartContext.tsx';
-import { useTheme } from '@/context/ThemeContext.tsx';
+import { useCart } from '@/hooks/context/CartContext.tsx';
+import { useTheme } from '@/hooks/context/ThemeContext.tsx';
 
 import styles from './Cart.module.css';
 

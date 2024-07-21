@@ -12,6 +12,7 @@ body {
   --footer-border: #CCC;
   --pagination-text: #111;
   --pagination-border-color: #F1F1F1 ;
+  --loader: #656565;
 }
 
 .darkTheme {
@@ -26,4 +27,5 @@ body {
   --footer-border: #333;
   --pagination-text: #FFF;
   --pagination-border-color: #656565 ;
+  --loader: #FFF;
 }

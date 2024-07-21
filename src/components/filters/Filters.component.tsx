@@ -1,11 +1,12 @@
 import CategoryFilterButtons from '@/components/filters/FilterButton.component.tsx';
 import SearchInput from '@/components/filters/SearchInput.component.tsx';
-import type { Category } from '@/constants/filtersCategory.ts';
 import { SortOption } from '@/constants/filtersSortOption.ts';
+import type { Category } from '@/interfaces/Category.ts';
 
 import styles from './Filters.module.css';
 
 interface FiltersComponentProps {
+    categories: Category[];
     selectedCategories: Category[];
     sortOption: SortOption;
     searchQuery: string;
@@ -16,6 +17,7 @@ interface FiltersComponentProps {
 }
 
 export const FiltersComponent: React.FC<FiltersComponentProps> = ({
+    categories,
     selectedCategories,
     sortOption,
     searchQuery,
@@ -29,7 +31,11 @@ export const FiltersComponent: React.FC<FiltersComponentProps> = ({
             <section className={styles.filterFlex}>
                 <SearchInput searchQuery={searchQuery} setSearchQuery={setSearchQuery} handleSearch={handleSearch} />
                 <div className={styles.rightFlex}>
-                    <CategoryFilterButtons selectedCategories={selectedCategories} handleCategorySelect={handleCategorySelect} />
+                    <CategoryFilterButtons
+                        categories={categories}
+                        selectedCategories={selectedCategories}
+                        handleCategorySelect={handleCategorySelect}
+                    />
                     <div className={styles.sortFlex}>
                         <p className={styles.sortBy}>Sort by:</p>
                         <select
