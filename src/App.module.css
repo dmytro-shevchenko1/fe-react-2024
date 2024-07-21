@@ -1,0 +1,31 @@
+body {
+  display: flex;
+  flex-direction: column;
+}
+
+.lightTheme {
+  background-color: #FFF;
+  --search-text: #656565;
+  --search-border-color: #E1E1E1;
+  --card-border-color: #CCC;
+  --about-link: #111;
+  --footer-border: #CCC;
+  --pagination-text: #111;
+  --pagination-border-color: #F1F1F1 ;
+  --loader: #656565;
+}
+
+.darkTheme {
+  background-color: #111;
+  color: #FFF;
+  --background-color: #FFF;
+  --search-bg: #111;
+  --search-text: #FFF;
+  --search-border-color: #656565;
+  --card-border-color: #333;
+  --about-link: #FFF;
+  --footer-border: #333;
+  --pagination-text: #FFF;
+  --pagination-border-color: #656565 ;
+  --loader: #FFF;
+}

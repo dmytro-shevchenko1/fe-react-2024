@@ -1,19 +1,16 @@
-import reactLogo from '@/assets/react.svg';
+import Router from '@/components/router/Router.component.tsx';
+import { useTheme } from '@/hooks/context/ThemeContext.tsx';
 
-import { HeaderComponent } from './components/header/Header.component.tsx';
-
-import './App.css';
+import styles from './App.module.css';
 
 function App() {
+    const { theme } = useTheme();
+
     return (
         <>
-            <HeaderComponent />
-            <main className="home">
-                <h1>
-                    <img src={reactLogo} alt="React logo" />
-                    Home page
-                </h1>
-            </main>
+            <div className={`${theme === 'dark' ? styles.darkTheme : styles.lightTheme}`}>
+                <Router />
+            </div>
         </>
     );
 }
